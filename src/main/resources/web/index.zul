@@ -1,0 +1,40 @@
+<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('vn.test.zkoss.viewmodels.CarViewModel')">
+    <hlayout>
+        <textbox id="txtKeyword" value="@bind(vm.keyword)" onOK="@command('search')"/>
+        <button id="btnSearch" iconSclass="z-icon-search" onClick="@command('search')" onOK="@command('search')">
+            Search
+        </button>
+    </hlayout>
+    <hlayout>
+        <listbox model="@load(vm.carList)" selectedItem="@bind(vm.selectedCar)">
+            <listhead>
+                <listheader label="ID" align="center"/>
+                <listheader label="Model" align="center"/>
+                <listheader label="Make" align="center"/>
+                <listheader label="Description" align="center"/>
+                <listheader label="Price" align="center"/>
+            </listhead>
+            <template name="model" var="car">
+                <listitem>
+                    <listcell label="@load(car.id)"/>
+                    <listcell label="@load(car.model)"/>
+                    <listcell label="@load(car.make)"/>
+                    <listcell label="@load(car.description)"/>
+                    <listcell>
+                        $
+                        <label value="@load(car.price)"/>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </hlayout>
+    <hlayout>
+        <image src="@load(vm.selectedCar.preview)"/>
+        <vbox>
+            <label value="@bind(vm.selectedCar.id)"/>
+            <label value="@bind(vm.selectedCar.model)"/>
+            <label value="@bind(vm.selectedCar.make)"/>
+            <label value="@bind(vm.selectedCar.price)"/>
+        </vbox>
+    </hlayout>
+</window>
